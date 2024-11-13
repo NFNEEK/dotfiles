@@ -1,0 +1,119 @@
+{
+  "name": "Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+      "plugins": "zsh-autosuggestions zsh-syntax-highlighting",
+      "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions https://github.com/zsh-users/zsh-syntax-highlighting",
+      "username": "codespace"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "github.copilot",
+        "ritwickdey.LiveServer",
+        "formulahendry.auto-rename-tag",
+        "bradlc.vscode-tailwindcss",
+        "christian-kohler.npm-intellisense",
+        "streetsidesoftware.code-spell-checker",
+        "eamodio.gitlens",
+        "wix.vscode-import-cost",
+        "PKief.material-icon-theme",
+        "ms-vsliveshare.vsliveshare",
+        "GitHub.copilot-chat",
+        "usernamehw.errorlens",
+        "wayou.vscode-todo-highlight",
+        "formulahendry.code-runner"
+      ],
+      "settings": {
+        // Editor settings
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.bracketPairColorization.enabled": true,
+        "editor.guides.bracketPairs": "active",
+        "editor.suggestSelection": "first",
+        "editor.inlineSuggest.enabled": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true,
+          "source.fixAll.eslint": true,
+          "source.organizeImports": true
+        },
+
+        // Terminal settings
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.fontFamily": "MesloLGS NF",
+        "terminal.integrated.fontSize": 14,
+
+        // Theme settings
+        "workbench.iconTheme": "material-icon-theme",
+        "workbench.colorTheme": "Default Dark+",
+        "editor.fontFamily": "MesloLGS NF, Menlo, Monaco, 'Courier New', monospace",
+        "editor.fontSize": 14,
+
+        // Git settings
+        "git.enableSmartCommit": true,
+        "git.autofetch": true,
+
+        // Copilot settings
+        "github.copilot.enable": {
+          "*": true,
+          "plaintext": false,
+          "markdown": false,
+          "scminput": false
+        },
+
+        // File settings
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+
+        // Language specific settings
+        "javascript.updateImportsOnFileMove.enabled": "always",
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "[javascript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[html]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "bash ${containerWorkspaceFolder}/.devcontainer/post-create.sh",
+  "postStartCommand": "bash ${containerWorkspaceFolder}/.devcontainer/post-start.sh",
+  "remoteUser": "codespace",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Application",
+      "onAutoForward": "openPreview"
+    },
+    "3001": {
+      "label": "API",
+      "onAutoForward": "notify"
+    }
+  },
+  "forwardPorts": [3000, 3001],
+  "waitFor": "postCreateCommand",
+  "updateContentCommand": "yarn install",
+  "containerEnv": {
+    "SHELL": "/bin/zsh"
+  }
+}

@@ -1,0 +1,35 @@
+# .config/git/.gitconfig
+[user]
+    name = NFNEEK
+    email = nf.neek@gmail.com
+[core]
+    editor = code --wait
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    excludesfile = ~/.gitignore
+    autocrlf = input
+[init]
+    defaultBranch = main
+[color]
+    ui = auto
+[pull]
+    rebase = false
+[push]
+    default = current
+    autoSetupRemote = true
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[help]
+    autocorrect = 1
+[alias]
+    uncommit = reset --soft HEAD^
+    unstage = reset HEAD --
+    undo = checkout --
+    last = log -1 HEAD --stat
+[fetch]
+    prune = true
